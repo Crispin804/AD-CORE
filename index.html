@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AD-CORE | Business Performance Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- SIDEBAR -->
+        <aside class="w-64 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 flex flex-col justify-between p-5">
+            <div>
+                <div class="flex items-center gap-2 mb-8">
+                    <div class="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">A</div>
+                    <span class="text-xl font-bold tracking-wider text-slate-800 dark:text-white">AD-CORE</span>
+                </div>
+                
+                <nav class="space-y-2">
+                    <button id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 font-medium text-sm">
+                        <span>📊</span> Dashboard
+                    </button>
+                    <button id="nav-analytics" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 font-medium text-sm">
+                        <span>📈</span> Analytics
+                    </button>
+                    <button id="nav-settings" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 font-medium text-sm">
+                        <span>⚙️</span> Settings
+                    </button>
+                </nav>
+            </div>
+
+            <div class="border-t border-slate-200 dark:border-slate-700 pt-4">
+                <button id="theme-toggle" class="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-sm font-medium">
+                    <span id="theme-toggle-icon">☀️</span> <span id="theme-toggle-text">Light Mode</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN WINDOW -->
+        <main class="flex-1 overflow-y-auto p-8">
+            
+            <!-- ====== PAGE 1: DASHBOARD ====== -->
+            <div id="dashboard-section">
+                <header class="mb-8">
+                    <h1 class="text-2xl font-bold text-slate-800 dark:text-white">Annual Performance Analyzer</h1>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Enter data below to instantly visualize quarterly business scaling.</p>
+                </header>
+
+                <!-- STATS CARDS -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Total Target Metrics</div>
+                        <div id="kpi-total" class="text-2xl font-bold text-slate-300 dark:text-slate-600">—</div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Average Performance</div>
+                        <div id="kpi-avg" class="text-2xl font-bold text-slate-300 dark:text-slate-600">—</div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">System Status</div>
+                        <div class="text-sm font-semibold text-blue-600 dark:text-blue-400 mt-2">Ready to Load</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- BLANK INPUT FORM -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm lg:col-span-1">
+                        <h3 class="text-lg font-semibold mb-4">Data Input Form</h3>
+                        <form id="performance-form" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 uppercase mb-1">Q1 Score (0-100)</label>
+                                <input id="q1-input" type="number" min="0" max="100" placeholder="0" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg outline-none text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 uppercase mb-1">Q2 Score (0-100)</label>
+                                <input id="q2-input" type="number" min="0" max="100" placeholder="0" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg outline-none text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 uppercase mb-1">Q3 Score (0-100)</label>
+                                <input id="q3-input" type="number" min="0" max="100" placeholder="0" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg outline-none text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 uppercase mb-1">Q4 Score (0-100)</label>
+                                <input id="q4-input" type="number" min="0" max="100" placeholder="0" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg outline-none text-sm">
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg text-sm transition-colors">
+                                Update Layout Graph
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- BAR GRAPH CONTAINER -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm lg:col-span-2 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">Annual Performance Trend</h3>
+                            <p class="text-xs text-slate-400 mb-6">Visual monthly scaling based on quarterly entries.</p>
+                        </div>
+                        
+                        <div class="h-64 flex items-end justify-between gap-2 pt-4 px-2 border-b border-l border-slate-200 dark:border-slate-700">
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-jan" class="w-full bg-blue-600 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Jan</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-feb" class="w-full bg-blue-600 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Feb</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-mar" class="w-full bg-blue-600 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Mar</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-apr" class="w-full bg-blue-50 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Apr</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-may" class="w-full bg-blue-50 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">May</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-jun" class="w-full bg-blue-50 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Jun</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-jul" class="w-full bg-indigo-600 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Jul</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-aug" class="w-full bg-indigo-600 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Aug</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-sep" class="w-full bg-indigo-600 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Sep</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-oct" class="w-full bg-indigo-50 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Oct</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-nov" class="w-full bg-indigo-50 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Nov</span>
+                            </div>
+                            <div class="w-full flex flex-col items-center gap-1">
+                                <div id="bar-dec" class="w-full bg-indigo-50 rounded-t transition-all duration-500" style="height: 0%;"></div>
+                                <span class="text-xs text-slate-400">Dec</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== PAGE 2: ANALYTICS ====== -->
+            <div id="analytics-section" class="hidden">
+                <h1 class="text-2xl font-bold mb-4">Deep-Dive Analytics</h1>
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 text-center shadow-sm">
+                    <p class="text-slate-400">Populate data metrics inside the main dashboard panel first.</p>
+                </div>
+            </div>
+
+            <!-- ====== PAGE 3: SETTINGS ====== -->
+            <div id="settings-section" class="hidden">
+                <h1 class="text-2xl font-bold mb-4">System Settings</h1>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm max-w-xl">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium">Alternative Display Theme</p>
+                            <p class="text-xs text-slate-400">Swap lighting environments safely.</p>
+                        </div>
+                        <button id="settings-theme-toggle" class="px-4 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-semibold">
+                            <span id="settings-toggle-icon">🌙</span> <span id="settings-toggle-text">Dark Mode</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
